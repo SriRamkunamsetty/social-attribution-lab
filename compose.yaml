@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      NODE_ENV: production
+      AUTH_REQUIRED: "false"
+    restart: unless-stopped
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: social_intelligence
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: change-me-before-production
+    volumes: [postgres_data:/var/lib/postgresql/data, ./db/migrations:/docker-entrypoint-initdb.d:ro]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d social_intelligence"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes: { postgres_data: {} }

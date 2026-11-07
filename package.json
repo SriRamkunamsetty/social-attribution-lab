@@ -1,0 +1,13 @@
+{
+  "name": "social-analytics-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node src/server.mjs",
+    "start": "node src/server.mjs",
+    "test": "node --test test/auth.test.mjs test/features.test.mjs test/registry.test.mjs",
+    "check": "node --check src/server.mjs && node --check src/registry.mjs && node --check public/app.js"
+  }
+}
